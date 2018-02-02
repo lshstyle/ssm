@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.UserDao">
+	<resultMap id="userBean" type="com.demo.model.User">
+		<id property="id" column="id" javaType ="java.lang.Integer" />
+		<result property="name" column="name" javaType ="java.lang.String" />
+		<result property="pwd" column="pwd" javaType ="java.lang.String" />
+	</resultMap>
+	
+	<select id="findAll" resultMap="userBean">
+		select * from t_user where isvalid=1
+	</select>
+</mapper>

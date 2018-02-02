@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.TicketDao">
+	<resultMap id="TicketBean" type="com.demo.model.Ticket">
+		<id column="ticket_id" property="ticketId" />
+		<result column="ticket_address" property="ticketAddress" />
+		<result column="ticket_price" property="ticketPrice" />
+		<result column="ticket_cid" property="ticketCid" />
+		<association property="customer" javaType="Customer">
+			<id property="customerId" column="customer_id" javaType="java.lang.Integer" />
+			<result property="customerName" column="customer_name"
+				javaType="java.lang.String" />
+			<result property="customerTel" column="customer_tel" javaType="java.lang.String" />
+		</association>
+	</resultMap>
+
+	<select id="selectTicketByName" parameterType="int"
+		resultMap="TicketBean">
+		select c.*,t.* from t_customer c,t_ticket t
+		where
+		c.customer_id=t.ticket_cid and t.ticket_id =#{id};
+	</select>
+</mapper>
